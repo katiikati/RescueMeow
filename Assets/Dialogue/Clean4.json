@@ -1,0 +1,1 @@
+﻿{"inkVersion":21,"root":[["\n",{"->":"main"},["done",{"#f":5,"#n":"g-0"}],null],"done",{"main":["^You need to clean the cat","\n","end",{"#f":1}],"catCleaned":["^The cat is clean!!!!","\n","ev",{"x()":"blackOut"},"pop","/ev","\n","end",{"#f":1}],"global decl":["ev","str","^Bloo","/str",{"VAR=":"playerName"},"/ev","end",null],"#f":1}],"listDefs":{}}
