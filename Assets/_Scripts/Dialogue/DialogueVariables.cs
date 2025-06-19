@@ -52,7 +52,6 @@ public class DialogueVariables
     {
         if (variables.ContainsKey(name))
         {
-            Debug.Log("Updating global dialogue variable: " + name + " = " + value);
             variables.Remove(name);
             variables.Add(name, value);
         }

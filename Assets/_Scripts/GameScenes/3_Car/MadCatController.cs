@@ -83,15 +83,16 @@ public class MadCatController : MonoBehaviour
         nameInputField.gameObject.SetActive(false);
         showingTextField = false;
         InputManager.GetInstance().EnableInteract();
-        continueArrow.SetActive(true);
+        DialogueManager.GetInstance().toggleContinueIcon();
         DialogueManager.GetInstance().ContinueStory();
     }
 
     public void ShowNameInputField()
     {
+        Debug.Log("Showing name input field");
         showingTextField = true;
         nameInputField.gameObject.SetActive(true);
-        continueArrow.SetActive(false);
+        DialogueManager.GetInstance().toggleContinueIcon();
     }
 
 }
