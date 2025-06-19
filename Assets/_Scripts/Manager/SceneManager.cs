@@ -13,7 +13,7 @@ public class SceneFader : MonoBehaviour
     {
         blackOutPanel.alpha = 0;
         blackOutPanel.gameObject.SetActive(false);
-        fadeCanvasGroup.alpha = 1; 
+        fadeCanvasGroup.alpha = 1;
         if (Instance == null)
         {
             Instance = this;

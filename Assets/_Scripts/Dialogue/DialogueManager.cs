@@ -17,7 +17,6 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject continueIcon;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
-    [SerializeField] private Animator portraitAnimator;
 
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
@@ -34,7 +33,7 @@ public class DialogueManager : MonoBehaviour
     [Header("Other")]
     [SerializeField] private ExternalFunctionHelper externalFunctionHelper;
     private Story currentStory;
-    private string talkingCharacterName;
+    private string catName = "";
     public bool dialogueIsPlaying { get; private set; }
 
     public bool canContinueToNextLine = false;
@@ -108,11 +107,8 @@ public class DialogueManager : MonoBehaviour
         if (!dialogueIsPlaying)
         {
             currentStory = new Story(inkJSON.text);
-            string playerName = PlayerPrefs.GetString("PlayerName", "");
-            currentStory.variablesState["playerName"] = playerName;
-
-            Debug.Log("In ink, player name is: " + currentStory.variablesState["playerName"]);
             currentStory.onError += HandleInkError;
+            currentStory.variablesState["catName"] = catName;
 
 
             dialogueIsPlaying = true;
@@ -123,7 +119,6 @@ public class DialogueManager : MonoBehaviour
 
             displayNameText.text = "???";
             dialogueText.text = "TEXT";
-            portraitAnimator.Play("Default");
 
             ContinueStory();
         }
@@ -134,9 +129,7 @@ public class DialogueManager : MonoBehaviour
         if (!dialogueIsPlaying)
         {
             currentStory = new Story(inkJSON.text);
-            string playerName = PlayerPrefs.GetString("PlayerName", "");
-            currentStory.variablesState["playerName"] = playerName;
-
+            currentStory.variablesState["catName"] = catName;
             currentStory.onError += HandleInkError;
 
 
@@ -148,7 +141,6 @@ public class DialogueManager : MonoBehaviour
 
             displayNameText.text = "???";
             dialogueText.text = "TEXT";
-            portraitAnimator.Play("Default");
 
             ContinueStory();
         }
@@ -165,9 +157,7 @@ public class DialogueManager : MonoBehaviour
         if (!dialogueIsPlaying)
         {
             currentStory = new Story(inkJSON.text);
-            string playerName = PlayerPrefs.GetString("PlayerName", "Player");
-            currentStory.variablesState["playerName"] = playerName;
-
+            currentStory.variablesState["catName"] = catName;
 
             if (!string.IsNullOrEmpty(startNode))
             {
@@ -183,7 +173,6 @@ public class DialogueManager : MonoBehaviour
 
             displayNameText.text = "???";
             dialogueText.text = "TEXT";
-            portraitAnimator.Play("Default");
 
             ContinueStory();
         }
@@ -204,8 +193,6 @@ public class DialogueManager : MonoBehaviour
 
     public void ContinueStory()
     {
-        string playerName = PlayerPrefs.GetString("PlayerName", "Player");
-        currentStory.variablesState["playerName"] = playerName;
         skipTyping = false;
 
         if (currentStory.currentChoices.Count > 0)
@@ -303,9 +290,6 @@ public class DialogueManager : MonoBehaviour
                 case SPEAKER_TAG:
                     displayNameText.text = tagValue;
                     break;
-                case PORTRAIT_TAG:
-                    portraitAnimator.Play(tagValue);
-                    break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
                     break;
@@ -365,5 +349,12 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueVariables.SaveVariables();
     }
+
+    public void saveCatName(string name)
+    {
+        currentStory.variablesState["catName"] = name;
+        catName = name;
+    }
+
 
 }

@@ -7,6 +7,7 @@ public class InkExternalFunctions
     {
         story.BindExternalFunction("nextScene", () => externalFunctionHelper.nextScene());
         story.BindExternalFunction("blackOut", () => externalFunctionHelper.blackOut());
+        story.BindExternalFunction("nameCat", () => externalFunctionHelper.nameCat());
     }
 
 
@@ -14,6 +15,7 @@ public class InkExternalFunctions
     {
         story.UnbindExternalFunction("nextScene");
         story.UnbindExternalFunction("blackOut");
+        story.UnbindExternalFunction("nameCat");
     }
 
     public void playEmote(string emoteName, Animator emoteAnimator)

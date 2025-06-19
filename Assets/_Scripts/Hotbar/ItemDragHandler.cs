@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections;
 
 public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -29,11 +28,12 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (dialoguePanel != null && dialoguePanel.activeInHierarchy)
+        /** if (dialoguePanel != null && dialoguePanel.activeInHierarchy)
         {
             warningController.addWarning("You can't use items during dialogue.");
             return;
         }
+        **/
         originalParent = transform.parent;
         transform.SetParent(transform.root);
         canvasGroup.blocksRaycasts = false;
@@ -42,23 +42,24 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (dialoguePanel != null && dialoguePanel.activeInHierarchy)
+        /** if (dialoguePanel != null && dialoguePanel.activeInHierarchy)
         {
             warningController.addWarning("You can't use items during dialogue.");
             return;
         }
-
+        **/
         transform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        /**
         if (dialoguePanel != null && dialoguePanel.activeInHierarchy)
         {
             warningController.addWarning("You can't use items during dialogue.");
             return;
         }
-
+        **/
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
 

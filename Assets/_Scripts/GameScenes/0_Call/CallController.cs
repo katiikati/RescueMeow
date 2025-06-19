@@ -8,29 +8,47 @@ public class CallController : MonoBehaviour
     [Header("Ink JSON")]
     [SerializeField] private TextAsset inkJSON;
 
-    private void Start()
+    [Header("Dialogue Panel")]
+    [SerializeField] private GameObject dialoguePanel;
+    private bool startDialogue = false;
+    [SerializeField] Animator callAnimator;
+
+    private void Awake()
     {
-        DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+        dialoguePanel.SetActive(false);
     }
     private void Update()
     {
-        if (!DialogueManager.GetInstance().dialogueIsPlaying)
+        if (startDialogue)
+        {
+            if (!DialogueManager.GetInstance().dialogueIsPlaying)
+            {
+                if (InputManager.GetInstance().GetInteractPressed())
+                {
+                    dialoguePanel.SetActive(true);
+                    DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+                }
+            }
+            else if (InputManager.GetInstance().GetInteractPressed())
+            {
+                if (DialogueManager.GetInstance().canContinueToNextLine)
+                {
+                    DialogueManager.GetInstance().ContinueStory();
+                }
+                else
+                {
+                    DialogueManager.GetInstance().skipTyping = true;
+                }
+            }
+        }
+        else
         {
             if (InputManager.GetInstance().GetInteractPressed())
             {
-                DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
-            }
-        }
-        else if (InputManager.GetInstance().GetInteractPressed())
-        {
-            if (DialogueManager.GetInstance().canContinueToNextLine)
-            {
-                DialogueManager.GetInstance().ContinueStory();
-            }
-            else
-            {
-                DialogueManager.GetInstance().skipTyping = true;
+                startDialogue = true;
+                callAnimator.Play("Call");
             }
         }
     }
+
 }

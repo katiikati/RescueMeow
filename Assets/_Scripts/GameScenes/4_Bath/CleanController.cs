@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class CatCleaner : MonoBehaviour
 {
@@ -38,10 +39,10 @@ public class CatCleaner : MonoBehaviour
                 DialogueManager.GetInstance().skipTyping = true;
             }
         }
-        
+
         if (isClean) return;
 
-        if (Input.GetMouseButton(0)) // mouse is held
+        if (Input.GetMouseButton(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Collider2D hit = Physics2D.OverlapPoint(mousePos);
@@ -53,6 +54,14 @@ public class CatCleaner : MonoBehaviour
                 if (currentClean >= cleanThreshold)
                 {
                     FinishCleaning();
+                    if (DialogueManager.GetInstance().dialogueIsPlaying)
+                    {
+                        StartCoroutine(EndingDialogue());
+                    }
+                    else
+                    {
+                        FinishCleaning();
+                    }
                 }
             }
         }
@@ -69,10 +78,17 @@ public class CatCleaner : MonoBehaviour
         }
     }
 
+    private IEnumerator EndingDialogue()
+    {
+        yield return StartCoroutine(DialogueManager.GetInstance().ExitDialogueMode());
+        FinishCleaning();
+    }
+
     private void FinishCleaning()
     {
         isClean = true;
         Debug.Log("Cat is clean!");
+        SlideController.GetInstance().incSliderValue();
         DialogueManager.GetInstance().EnterDialogueMode(inkJSON, emoteAnimator, "catCleaned");
     }
 }
