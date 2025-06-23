@@ -1,4 +1,4 @@
-**~~ For Hackclub's Athena Award~~**
+**For Hackclub's Athena Award**
 
 - Rescue Meow is a visual novel-esque game about a rescuing a kitty :3 There are simple mini quests to get the cat clean, fed, and happy <3
 
