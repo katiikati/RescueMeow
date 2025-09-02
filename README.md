@@ -8,7 +8,7 @@
   
 - I struggled with making the game fun since most of the mini quests are pretty easy. However, a few simple adjustments to the UI made the game much more visually pleasing and interesting
 
-**Acknowldegements:**
+**Acknowledgements:**
 
 - Background Music: "Lazy Day - Stylish Futuristic Chill" by penguinmusic
 
