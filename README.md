@@ -20,3 +20,5 @@
 
 - My cat Bloo for inspiration
 <img width="231" alt="Screenshot 2025-06-23 at 4 52 37 PM" src="https://github.com/user-attachments/assets/cc435660-d2f5-4ce6-8a77-e65553d72532" />
+
+[![Athena Award Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Faward.athena.hackclub.com%2Fapi%2Fbadge)](https://award.athena.hackclub.com?utm_source=readme)
